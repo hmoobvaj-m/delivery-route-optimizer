@@ -1,0 +1,21 @@
+name: Security Scan
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  security-placeholder:
+    name: Security Placeholder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Confirm security workflow is active
+        run: |
+          echo "Security workflow active. CodeQL will be enabled after source code is added."

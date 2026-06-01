@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  repo-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check repository structure
+        run: |
+          test -f README.md
+          test -f .gitignore
+          test -f .env.example
+
+      - name: Prevent committed secrets by filename
+        run: |
+          FOUND=$(find . \( -name ".env" -o -name "*.pem" -o -name "*.key" \))
+          if [ -n "$FOUND" ]; then
+            echo "Forbidden files found:"
+            echo "$FOUND"
+            exit 1
+          fi

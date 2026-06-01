@@ -1,0 +1,16 @@
+# Default owner
+* @hmoobvaj-m
+
+# GitHub Actions and repo security
+.github/ @hmoobvaj-m
+
+# Infrastructure
+infrastructure/ @hmoobvaj-m
+docker-compose.yml @hmoobvaj-m
+
+# Backend
+apps/api/ @hmoobvaj-m
+apps/worker/ @hmoobvaj-m
+
+# Frontend
+apps/web/ @hmoobvaj-m
