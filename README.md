@@ -125,6 +125,20 @@ sudo apt update
 sudo apt install -y jq
 ```
 
+Verify the health endpoint using jq:
+
+```bash
+curl -s http://localhost:8000/health | jq
+```
+
+Expected response:
+
+```json
+{"status":"ok",
+"service":"api",
+"env":"dev"}
+```
+
 ## Current Development Workflow
 
 This is currently a solo-development project. Direct pushes to `main` are allowed, but destructive operations such as force pushes and branch deletion should remain blocked.
