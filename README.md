@@ -143,19 +143,11 @@ Expected response:
 
 ## Current Development Workflow
 
-This is currently a solo-development project. Direct pushes to `main` are allowed, but destructive operations such as force pushes and branch deletion should remain blocked.
-
 Recommended workflow:
 
 ```bash
-git switch main
-git pull origin main
-
-# make changes
-
 ruff check apps/api
 python -m pytest apps/api
-
 git add .
 git commit -m "type: concise description"
 git push origin main
