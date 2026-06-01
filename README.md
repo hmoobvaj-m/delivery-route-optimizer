@@ -65,8 +65,6 @@ cp .env.example .env
 
 Update `.env` with local-only credentials.
 
-Do not commit `.env`.
-
 ### Start Local Infrastructure
 
 Start PostgreSQL/PostGIS and Redis:
