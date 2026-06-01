@@ -134,9 +134,11 @@ curl -s http://localhost:8000/health | jq
 Expected response:
 
 ```json
-{"status":"ok",
+{
+"status":"ok",
 "service":"api",
-"env":"dev"}
+"env":"dev"
+}
 ```
 
 ## Current Development Workflow
