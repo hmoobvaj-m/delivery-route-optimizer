@@ -11,11 +11,16 @@ permissions:
 
 jobs:
   security-placeholder:
-    name: Security Placeholder
+    name: CodeQL Python Analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Confirm security workflow is active
-        run: |
-          echo "Security workflow active. CodeQL will be enabled after source code is added."
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
