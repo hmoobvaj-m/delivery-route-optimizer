@@ -1,11 +1,11 @@
+import logging
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
 from delivery_route_api.config import get_settings
 from delivery_route_api.logging import configure_logging
-
-from collections.abc import AsyncIterator
-from contextlib import asynccontextmanager
-import logging
 
 settings = get_settings()
 configure_logging(settings.log_level)

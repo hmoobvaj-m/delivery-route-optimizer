@@ -5,7 +5,6 @@ import logging
 from datetime import UTC, datetime
 from typing import Any
 
-
 _RESERVED_LOG_RECORD_ATTRS = {
     "args",
     "asctime",
