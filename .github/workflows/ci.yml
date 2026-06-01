@@ -23,4 +23,9 @@ jobs:
 
       - name: Prevent committed secrets by filename
         run: |
-          ! find . -name ".env" -o -name "*.pem" -o -name "*.key"
+          FOUND=$(find . \( -name ".env" -o -name "*.pem" -o -name "*.key" \))
+          if [ -n "$FOUND" ]; then
+            echo "Forbidden files found:"
+            echo "$FOUND"
+            exit 1
+          fi
