@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from delivery_route_api.config import get_settings
 
 settings = get_settings()
