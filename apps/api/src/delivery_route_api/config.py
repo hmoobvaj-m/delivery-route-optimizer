@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_name: str = "delivery-route-optimizer"
-    app_env: str = "development"
+    app_env: str = "dev"
     log_level: str = "debug"
     
     api_host: str = "0.0.0.0"
