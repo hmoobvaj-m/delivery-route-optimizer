@@ -11,8 +11,8 @@ class Settings(BaseSettings):
     api_host: str = "0.0.0.0"
     api_port: int = 8000
     
-    database_url: str = ""
-    redis_url: str = ""
+    database_url: str = "postgresql+asyncpg://app:app@localhost:5433/delivery_routes"
+    redis_url: str = "redis://localhost:6379/0"
     readiness_timeout_seconds: float = 2.0
     
     database_echo: bool = False
