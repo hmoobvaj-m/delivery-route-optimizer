@@ -10,13 +10,13 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
+from delivery_route_api.config import get_settings  # noqa: E402
+from delivery_route_api.models.base import Base  # noqa: E402
+
 API_ROOT = Path(__file__).resolve().parents[1]
 SRC_ROOT = API_ROOT / "src"
 
 sys.path.insert(0, str(SRC_ROOT))
-
-from delivery_route_api.config import get_settings  # noqa: E402
-from delivery_route_api.models.base import Base  # noqa: E402
 
 config = context.config
 
@@ -29,6 +29,22 @@ config.set_main_option("sqlalchemy.url", settings.database_url)
 target_metadata = Base.metadata
 
 
+def include_object(
+    object_: object,
+    name: str | None,
+    type_: str,
+    reflected: bool,
+    compare_to: object | None,
+) -> bool:
+    # Ignore database objects that exist in Postgres/PostGIS but are not part
+    # of SQLAlchemy application metadata. This prevents Alembic from trying to
+    # drop PostGIS/Tiger/Topology-managed tables during autogeneration.
+    if reflected and compare_to is None:
+        return False
+
+    return True
+
+
 def run_migrations_offline() -> None:
     url = config.get_main_option("sqlalchemy.url")
 
@@ -37,6 +53,7 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        include_object=include_object,
     )
 
     with context.begin_transaction():
@@ -47,6 +64,7 @@ def do_run_migrations(connection: Connection) -> None:
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
+        include_object=include_object,
     )
 
     with context.begin_transaction():

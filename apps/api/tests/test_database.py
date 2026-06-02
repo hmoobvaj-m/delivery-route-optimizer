@@ -5,9 +5,7 @@ from delivery_route_api.database import create_database_engine
 
 
 def test_create_database_engine_uses_configured_database_url() -> None:
-    settings = Settings(
-        database_url="postgresql+asyncpg://app:app@localhost:5433/delivery_routes"
-    )
+    settings = Settings(database_url="postgresql+asyncpg://app:app@localhost:5433/delivery_routes")
 
     engine = create_database_engine(settings)
 
