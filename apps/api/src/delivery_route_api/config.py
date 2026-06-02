@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     
     database_url: str = ""
     redis_url: str = ""
+    readiness_timeout_seconds: float = 2.0
     
     model_config = SettingsConfigDict(
         env_file=".env",
