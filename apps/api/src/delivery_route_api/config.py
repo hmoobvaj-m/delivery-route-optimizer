@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     redis_url: str = ""
     readiness_timeout_seconds: float = 2.0
     
+    database_echo: bool = False
+    database_pool_size: int = 5
+    database_max_overflow: int = 10
+    
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from delivery_route_api.config import get_settings
+from delivery_route_api.database import dispose_database_engine
 from delivery_route_api.logging import configure_logging
 from delivery_route_api.readiness import run_readiness_checks
 
@@ -24,6 +25,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         },
     )
     yield
+    await dispose_database_engine()
     logger.info(
         "app_shutdown",
         extra = {
