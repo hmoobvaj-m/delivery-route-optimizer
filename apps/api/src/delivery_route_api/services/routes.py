@@ -77,6 +77,8 @@ class StopRepositoryProtocol(Protocol):
 
     async def count_for_route(self, route_id: UUID) -> int: ...
 
+    async def list_for_route(self, route_id: UUID) -> list[Stop]: ...
+
 
 class RouteService:
     def __init__(
@@ -136,6 +138,16 @@ class RouteService:
         )
 
         return stop
+
+    async def get_route(self, route_id: UUID) -> Route | None:
+        return await self.route_repository.get(route_id)
+
+    async def list_stops(self, route_id: UUID) -> list[Stop]:
+        route = await self.route_repository.get(route_id)
+        if route is None:
+            raise RouteNotFoundError(f"Route {route_id} was not found.")
+
+        return await self.stop_repository.list_for_route(route_id)
 
     def _validate_stop_input(self, data: CreateStopInput) -> None:
         if data.sequence_number < 1:

@@ -6,6 +6,7 @@ from typing import Any
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
+from delivery_route_api.api.routes import router as routes_router
 from delivery_route_api.config import get_settings
 from delivery_route_api.database import dispose_database_engine
 from delivery_route_api.logging import configure_logging
@@ -34,6 +35,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.include_router(routes_router)
 
 @app.get("/ready", tags=["system"])
 async def readiness_check() -> JSONResponse:
