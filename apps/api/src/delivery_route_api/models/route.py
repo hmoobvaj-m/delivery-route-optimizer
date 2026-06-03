@@ -47,3 +47,7 @@ class Route(Base):
     )
     sequences = relationship("RouteSequence", back_populates="route", cascade="all, delete-orphan")
     metrics = relationship("RouteMetric", back_populates="route", cascade="all, delete-orphan")
+    
+    @property
+    def stop_count(self) -> int:
+        return self.original_stop_count

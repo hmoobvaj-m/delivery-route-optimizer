@@ -32,7 +32,7 @@ class RouteRepository:
         return route
 
     async def get(self, route_id: UUID) -> Route | None:
-        return await self.sesion.get(Route, route_id)
+        return await self.session.get(Route, route_id)
 
     async def list(self, *, limit: int = 100, offset: int = 0) -> list[Route]:
         statement = select(Route).order_by(Route.created_at.desc()).limit(limit).offset(offset)

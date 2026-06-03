@@ -38,7 +38,12 @@ AsyncSessionLocal = create_database_sessionmaker(database_engine)
 
 async def get_database_session() -> AsyncIterator[AsyncSession]:
     async with AsyncSessionLocal() as session:
-        yield session
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
 
 
 async def dispose_database_engine() -> None:
